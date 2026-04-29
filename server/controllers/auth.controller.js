@@ -162,6 +162,47 @@ const updateOnboarding = async (req, res) => {
   }
 };
 
+const updateProfile = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.user.userId,
+      { $set: req.body },
+      { new: true, runValidators: true }
+    ).select('-password');
+
+    if (!user) {
+      return errorResponse(res, 'NOT_FOUND', 'User not found', 404);
+    }
+
+    return successResponse(res, user, 'Profile updated successfully');
+  } catch (error) {
+    return errorResponse(res, 'SERVER_ERROR', error.message, 500);
+  }
+};
+
+const updatePassword = async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    const user = await User.findById(req.user.userId);
+    if (!user) {
+      return errorResponse(res, 'NOT_FOUND', 'User not found', 404);
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return errorResponse(res, 'INVALID_CREDENTIALS', 'Current password is incorrect', 401);
+    }
+
+    const salt = await bcrypt.genSalt(12);
+    user.password = await bcrypt.hash(newPassword, salt);
+    await user.save();
+
+    return successResponse(res, null, 'Password updated successfully');
+  } catch (error) {
+    return errorResponse(res, 'SERVER_ERROR', error.message, 500);
+  }
+};
+
 module.exports = {
   signup,
   login,
@@ -169,4 +210,6 @@ module.exports = {
   me,
   verifyEmail,
   updateOnboarding,
+  updateProfile,
+  updatePassword
 };

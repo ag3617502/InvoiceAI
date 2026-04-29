@@ -253,7 +253,7 @@ const Projects = () => {
       {/* Add Project Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="bg-surface p-8 rounded-2xl border border-border shadow-purple-glow max-w-lg w-full">
+          <div className="bg-surface p-8 rounded-2xl border border-border shadow-purple-glow max-w-lg w-full max-h-[90vh] overflow-y-auto">
             <h2 className="text-2xl font-bold text-text-primary mb-6">{editProjectId ? 'Edit Project' : 'Create New Project'}</h2>
             <form onSubmit={handleCreateProject} className="space-y-4">
               <div>

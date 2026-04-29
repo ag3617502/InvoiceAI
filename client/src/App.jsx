@@ -17,8 +17,7 @@ import AIHub from './pages/AIHub';
 import Projects from './pages/Projects';
 import ProjectDetail from './pages/ProjectDetail';
 
-// Dummy components for missing pages
-const Settings = () => <div className="text-white text-2xl">Settings Page (Coming Soon)</div>;
+import Settings from './pages/Settings';
 
 function App() {
   return (

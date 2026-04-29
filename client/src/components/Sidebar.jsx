@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import useAuthStore from '../store/authStore';
 
-const Sidebar = () => {
+const Sidebar = ({ onClose }) => {
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'night');
@@ -44,12 +44,11 @@ const Sidebar = () => {
     { name: 'Projects', icon: <Briefcase size={20} />, path: '/app/projects' },
     { name: 'Invoices', icon: <FileText size={20} />, path: '/app/invoices' },
     { name: 'AI Hub', icon: <Sparkles size={20} />, path: '/app/ai-hub' },
-    // { name: 'Expenses', icon: <DollarSign size={20} />, path: '/app/expenses' },
     { name: 'Settings', icon: <Settings size={20} />, path: '/app/settings' },
   ];
 
   return (
-    <aside className="w-64 bg-surface2 h-screen fixed left-0 top-0 border-r border-border flex flex-col justify-between z-10">
+    <aside className="w-64 bg-surface2 h-screen border-r border-border flex flex-col justify-between">
       {/* Top section - Logo */}
       <div>
         <div className="p-6 border-b border-border">
@@ -64,6 +63,7 @@ const Sidebar = () => {
             <NavLink
               key={item.name}
               to={item.path}
+              onClick={() => onClose && onClose()}
               className={({ isActive }) =>
                 `flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium ${
                   isActive
@@ -83,7 +83,7 @@ const Sidebar = () => {
       <div className="px-4 mb-4">
         <button
           onClick={toggleTheme}
-          className="flex items-center justify-center gap-3 w-full py-2.5 px-4 bg-surface rounded-xl border border-border text-text-secondary hover:text-white hover:border-primary transition-all text-sm font-semibold shadow-md"
+          className="flex items-center justify-center gap-3 w-full py-2.5 px-4 bg-surface rounded-xl border border-border text-text-secondary hover:text-text-primary hover:border-primary transition-all text-sm font-semibold shadow-md"
         >
           {theme === 'night' ? (
             <>
@@ -104,7 +104,7 @@ const Sidebar = () => {
             {user?.businessName?.charAt(0).toUpperCase() || 'U'}
           </div>
           <div className="overflow-hidden">
-            <p className="text-sm font-medium text-white truncate">{user?.businessName}</p>
+            <p className="text-sm font-medium text-text-primary truncate">{user?.businessName}</p>
             <span className="flex items-center gap-1 text-xs text-secondary capitalize">
               <Shield size={12} /> {user?.plan || 'Free'} Plan
             </span>

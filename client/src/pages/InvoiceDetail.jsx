@@ -173,7 +173,7 @@ const InvoiceDetail = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 text-sm border-b border-border pb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm border-b border-border pb-6">
             <div>
               <p className="text-text-secondary font-semibold uppercase tracking-wider text-xs mb-2">Billed To:</p>
               <p className="text-text-primary text-lg font-bold">{invoice.clientId?.name || 'Deleted Client'}</p>
@@ -182,11 +182,11 @@ const InvoiceDetail = () => {
               {invoice.clientId?.gstNumber && <p className="text-primary text-xs mt-2 font-semibold">GSTIN: {invoice.clientId.gstNumber}</p>}
             </div>
             <div className="text-right space-y-2">
-              <p className="text-text-secondary"><span className="font-semibold text-white">Date:</span> {new Date(invoice.issueDate).toLocaleDateString('en-IN')}</p>
-              <p className="text-text-secondary"><span className="font-semibold text-white">Due Date:</span> {new Date(invoice.dueDate).toLocaleDateString('en-IN')}</p>
+              <p className="text-text-secondary"><span className="font-semibold text-text-primary">Date:</span> {new Date(invoice.issueDate).toLocaleDateString('en-IN')}</p>
+              <p className="text-text-secondary"><span className="font-semibold text-text-primary">Due Date:</span> {new Date(invoice.dueDate).toLocaleDateString('en-IN')}</p>
               {invoice.projectId && (
                 <p className="text-text-secondary">
-                  <span className="font-semibold text-white">Project:</span>{' '}
+                  <span className="font-semibold text-text-primary">Project:</span>{' '}
                   <Link to={`/app/projects/${invoice.projectId._id || invoice.projectId}`} className="text-primary hover:underline font-semibold">
                     {invoice.projectId.name || 'View Project'}
                   </Link>
@@ -274,28 +274,28 @@ const InvoiceDetail = () => {
         {/* Right: Insights / Status Tracker */}
         <div className="space-y-6">
           <div className="bg-surface p-6 rounded-2xl border border-border">
-            <h3 className="text-lg font-bold text-white mb-4">Payment Tracking</h3>
-            <div className="space-y-4 relative before:absolute before:left-[17px] before:top-2 before:bottom-2 before:w-[2px] before:bg-border">
+            <h3 className="text-lg font-bold text-text-primary mb-4">Payment Tracking</h3>
+            <div className="space-y-4 relative before:absolute before:left-[7px] before:top-2 before:bottom-2 before:w-[2px] before:bg-border">
               <div className="flex items-start gap-4 relative">
-                <div className="p-1 bg-surface border-4 border-success rounded-full z-10 mt-1"></div>
+                <div className="w-4 h-4 bg-surface border-4 border-success rounded-full z-10 mt-1 flex-shrink-0"></div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Invoice Generated</p>
+                  <p className="text-sm font-semibold text-text-primary">Invoice Generated</p>
                   <p className="text-xs text-text-secondary">{new Date(invoice.createdAt).toLocaleDateString('en-IN')}</p>
                 </div>
               </div>
               
               <div className="flex items-start gap-4 relative">
-                <div className={`p-1 bg-surface border-4 ${invoice.status === 'paid' ? 'border-success' : 'border-primary'} rounded-full z-10 mt-1`}></div>
+                <div className={`w-4 h-4 bg-surface border-4 ${invoice.status === 'paid' ? 'border-success' : 'border-primary'} rounded-full z-10 mt-1 flex-shrink-0`}></div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Sent to Client</p>
+                  <p className="text-sm font-semibold text-text-primary">Sent to Client</p>
                   <p className="text-xs text-text-secondary">Email tracker offline</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-4 relative">
-                <div className={`p-1 bg-surface border-4 ${invoice.status === 'paid' ? 'border-success' : 'border-border'} rounded-full z-10 mt-1`}></div>
+                <div className={`w-4 h-4 bg-surface border-4 ${invoice.status === 'paid' ? 'border-success' : 'border-border'} rounded-full z-10 mt-1 flex-shrink-0`}></div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Payment Received</p>
+                  <p className="text-sm font-semibold text-text-primary">Payment Received</p>
                   {invoice.status === 'paid' ? (
                     <p className="text-xs text-text-secondary">{new Date(invoice.updatedAt).toLocaleDateString('en-IN')}</p>
                   ) : (

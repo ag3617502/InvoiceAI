@@ -11,5 +11,7 @@ router.post('/logout', authController.logout);
 router.get('/me', auth, authController.me);
 router.get('/verify-email/:token', authController.verifyEmail);
 router.patch('/onboarding', auth, authController.updateOnboarding);
+router.put('/profile', auth, authController.updateProfile);
+router.put('/password', auth, authController.updatePassword);
 
 module.exports = router;

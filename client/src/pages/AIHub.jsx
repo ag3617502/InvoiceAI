@@ -125,7 +125,7 @@ const AIHub = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 border-b border-border pb-4">
+      <div className="flex flex-wrap gap-2 border-b border-border pb-4">
         {[
           { id: 'proposal', name: 'Proposal Writer', icon: <FileText size={16} /> },
           { id: 'reminder', name: 'Payment Reminders', icon: <Send size={16} /> },
