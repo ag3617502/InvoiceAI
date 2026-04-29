@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+:root {
+  /* Default Night Theme */
+  --bg-color: #0F0F1A;
+  --surface-color: #1A1A2E;
+  --surface2-color: #16213E;
+  --border-color: #2A2A45;
+  --text-primary-color: #FFFFFF;
+  --text-secondary-color: #A0AEC0;
+  --text-muted-color: #4A5568;
+}
+
+:root[data-theme="light"] {
+  /* Day Theme */
+  --bg-color: #F7F9FC;
+  --surface-color: #FFFFFF;
+  --surface2-color: #EDF2F7;
+  --border-color: #E2E8F0;
+  --text-primary-color: #1A202C;
+  --text-secondary-color: #4A5568;
+  --text-muted-color: #718096;
+}
+
+@theme {
+  --color-primary: #6C63FF;
+  --color-primary-dark: #4B44CC;
+  --color-secondary: #00C9A7;
+  --color-accent: #FF6B6B;
+  --color-warning: #FFB347;
+  --color-success: #2ECC71;
+  --color-background: var(--bg-color);
+  --color-surface: var(--surface-color);
+  --color-surface2: var(--surface2-color);
+  --color-border: var(--border-color);
+  --color-text-primary: var(--text-primary-color);
+  --color-text-secondary: var(--text-secondary-color);
+  --color-text-muted: var(--text-muted-color);
+  
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  --shadow-purple-glow: 0 4px 24px rgba(108, 99, 255, 0.15);
+}
+
+@utility bg-background {
+  background-color: var(--color-background);
+}
+
+@utility text-text-primary {
+  color: var(--color-text-primary);
+}
+
+@utility font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Base styles using the theme variables */
+@layer base {
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-surface2);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-border);
+}
